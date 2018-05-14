@@ -4,7 +4,7 @@
              xmlns:local="clr-namespace:ArchivistGame"
              x:Class="ArchivistGame.MainPage">
 
-	<Label Text="Welcome to Xamarin.Forms!" 
+	<Label Text="Welcome to Project 2018!" 
            VerticalOptions="Center" 
            HorizontalOptions="Center" />
 
