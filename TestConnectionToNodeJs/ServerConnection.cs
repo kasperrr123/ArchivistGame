@@ -1,26 +1,19 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
-using TestConnectionToNodeJs.models;
+using Newtonsoft.Json;
 
-namespace TestConnectionToNodeJs
+namespace ArchivistGame
 {
-    class Program
+
+    class ServerConnection
     {
 
-        Bike bike;
-        static void Main(string[] args)
-        {
-            GetRequest().Wait();
+        public List<Bike> bikes = new List<object>();
 
-
-        }
-
-        async static Task GetRequest()
+       
+        public async static Task GetRequestBike()
         {
             // Create a New HttpClient object.
             HttpClient client = new HttpClient();
@@ -28,15 +21,19 @@ namespace TestConnectionToNodeJs
             // Call asynchronous network methods in a try/catch block to handle exceptions
             try
             {
-                List<Bike> listofBikes = new List<Bike>();
+               
+                List<Object> listofBikes = new List<Object>();
                 HttpResponseMessage response = await client.GetAsync("http://100.72.15.51:3000/bikes");
                 response.EnsureSuccessStatusCode();
                 string json_result = await response.Content.ReadAsStringAsync();
                 dynamic bikes = JsonConvert.DeserializeObject<dynamic>(json_result);
                 foreach (var item in bikes)
                 {
-                    Console.WriteLine(item);
+                    listofBikes.Add(item);
                 }
+
+                ForwardList(listofBikes);
+
             }
             catch (HttpRequestException e)
             {
@@ -48,10 +45,11 @@ namespace TestConnectionToNodeJs
             // when done using it, so the app doesn't leak resources
             client.Dispose();
 
-
         }
 
-     
-
+        private void ForwardList(List<object> listofBikes)
+        {
+            bikes = listofBikes;
+        }
     }
 }

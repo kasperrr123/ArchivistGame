@@ -1,26 +1,30 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
+using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using TestConnectionToNodeJs.models;
 
+using System.Net;
+
+using System.Net.Http.Headers;
+using Newtonsoft.Json;
+
 namespace TestConnectionToNodeJs
 {
-    class Program
+
+    class DatabaseConnection
     {
 
-        Bike bike;
-        static void Main(string[] args)
-        {
-            GetRequest().Wait();
+        public List<Bike> bikes { get; set; }
 
+        public DatabaseConnection()
+        {
 
         }
 
-        async static Task GetRequest()
+        async static Task<List<Bike>> GetBikes()
         {
             // Create a New HttpClient object.
             HttpClient client = new HttpClient();
@@ -35,8 +39,10 @@ namespace TestConnectionToNodeJs
                 dynamic bikes = JsonConvert.DeserializeObject<dynamic>(json_result);
                 foreach (var item in bikes)
                 {
-                    Console.WriteLine(item);
+                    listofBikes.Add(item);
                 }
+
+                return listofBikes;
             }
             catch (HttpRequestException e)
             {
@@ -48,10 +54,12 @@ namespace TestConnectionToNodeJs
             // when done using it, so the app doesn't leak resources
             client.Dispose();
 
+            return null;
 
         }
 
-     
+
+
 
     }
 }

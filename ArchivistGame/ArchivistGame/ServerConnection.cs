@@ -1,26 +1,24 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
-using TestConnectionToNodeJs.models;
+using ArchivistGame.models;
+using Newtonsoft.Json;
 
-namespace TestConnectionToNodeJs
+namespace ArchivistGame
 {
-    class Program
+
+    class ServerConnection
     {
+        public List<Bike> Bikes { get; set; }
 
-        Bike bike;
-        static void Main(string[] args)
+        public ServerConnection()
         {
-            GetRequest().Wait();
-
-
+            Bikes = new List<Bike>();
+            GetRequestBike();
         }
-
-        async static Task GetRequest()
+       
+        public async Task GetRequestBike()
         {
             // Create a New HttpClient object.
             HttpClient client = new HttpClient();
@@ -28,6 +26,7 @@ namespace TestConnectionToNodeJs
             // Call asynchronous network methods in a try/catch block to handle exceptions
             try
             {
+               
                 List<Bike> listofBikes = new List<Bike>();
                 HttpResponseMessage response = await client.GetAsync("http://100.72.15.51:3000/bikes");
                 response.EnsureSuccessStatusCode();
@@ -35,8 +34,20 @@ namespace TestConnectionToNodeJs
                 dynamic bikes = JsonConvert.DeserializeObject<dynamic>(json_result);
                 foreach (var item in bikes)
                 {
-                    Console.WriteLine(item);
+                    listofBikes.Add(new Bike
+                    {
+                        id = item.id,
+                        type = item.type,
+                        model = item.model,
+                        price = item.price,
+                        stelid = item.stelid,
+                        gender = item.gender,
+                        available = item.available
+                    });
                 }
+
+                ForwardList(listofBikes);
+
             }
             catch (HttpRequestException e)
             {
@@ -44,14 +55,17 @@ namespace TestConnectionToNodeJs
                 Console.WriteLine("Message :{0} ", e.Message);
             }
 
+
             // Need to call dispose on the HttpClient object
             // when done using it, so the app doesn't leak resources
             client.Dispose();
-
-
+           
         }
 
-     
 
+        private void ForwardList(List<Bike> listofBikes)
+        {
+            Bikes = listofBikes;
+        }
     }
 }
