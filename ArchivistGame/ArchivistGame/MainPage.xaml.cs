@@ -13,5 +13,21 @@ namespace ArchivistGame
 		{
 			InitializeComponent();
 		}
-	}
+
+
+        void OnImageNameTapped(object sender, EventArgs args)
+        {
+            DisplayAlert("Yes!", "TODO Settings page", "Ok");
+        }
+
+
+
+        private void GoToChooseTopicPage_Clicked(object sender, EventArgs e)
+        {
+
+          
+
+            Navigation.PushAsync(new ChooseTopic());
+        }
+    }
 }
