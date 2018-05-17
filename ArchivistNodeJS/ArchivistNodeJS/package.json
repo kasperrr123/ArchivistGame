@@ -1,0 +1,26 @@
+{
+  "name": "archivist-node-js",
+  "version": "0.0.0",
+  "description": "ArchivistNodeJS",
+  "main": "app.js",
+  "private": true,
+  "scripts": {
+    "start": "node app"
+  },
+  "author": {
+    "name": "david"
+  },
+  "dependencies": {
+    "Blob": "^0.10.0",
+    "blob": "0.0.4",
+    "body-parser": "^1.18.3",
+    "cookie-parser": "^1.4.3",
+    "debug": "^3.1.0",
+    "express": "^4.16.3",
+    "jsonwebtoken": "^8.2.1",
+    "mongoose": "^5.1.1",
+    "morgan": "^1.9.0",
+    "pug": "^2.0.3",
+    "serve-favicon": "^2.5.0"
+  }
+}
