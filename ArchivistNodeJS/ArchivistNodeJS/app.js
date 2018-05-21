@@ -2,6 +2,8 @@ const app = require('express')();
 const routes = require('./Routes');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const busboy = require('connect-busboy');
+
 
 var allowCrossDomain = function (req, res, next) {
     res.header('Access-Control-Allow-Origin', 'http://localhost:4200');
@@ -14,6 +16,7 @@ var urlencode = bodyParser.urlencoded({ extended: true });
 
 app.use(bodyParser.json());
 
+app.use(busboy());
 app.use(allowCrossDomain);
 
 mongoose.connect('mongodb://localhost:27017/ArchivistGame')

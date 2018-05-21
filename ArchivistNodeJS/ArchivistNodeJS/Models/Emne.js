@@ -5,7 +5,7 @@ var emneSchema = new schema({
     emne: String,
     beskrivelse: String,
     antalBrugt: Number,
-    billede: { data: Buffer, contentType: String },
+    billede: String,
 });
 
 module.exports = mongoose.model('Emne', emneSchema);

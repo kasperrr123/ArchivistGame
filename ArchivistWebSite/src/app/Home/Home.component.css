@@ -1,0 +1,43 @@
+#labels {
+    margin-top: 10px;
+}
+
+#emailinput {
+    margin-top: 3px;
+}
+
+#passwordinput {
+    margin-top: 3px;
+}
+
+/* @media(min-width:768) and (max-width:1023) {
+    #labels {
+        margin-top: 2%;
+    }
+    #inputs {
+        margin-top: 2%;
+    }
+} */
+
+@media (max-width: 767px) {
+    #emailinput {
+        margin-bottom: 4px;
+    }
+    #passwordinput {
+        margin-bottom: 4px;
+    }
+    #usernamelabel {
+        margin-top: 5%;
+    }
+    #labels {
+        margin-top: 2%;
+        float: left;
+    }
+    #inputs {
+        margin-top: 2%;
+        float: right;
+    }
+    #picture {
+        margin-bottom: 2%;
+    }
+}
