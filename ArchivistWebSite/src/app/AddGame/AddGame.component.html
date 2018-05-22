@@ -1,0 +1,84 @@
+<div class="col-md-2"></div>
+<div class="col-md-6">
+  <h1 class="text-center">Tilføj Spil</h1>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+      <label for="emne">Emne</label>
+      <select class="form-control" id="emne">
+        <option>
+          vælg emne
+        </option>
+      </select>
+      <button type="button" class="btn btn-sm btn-success pull-right" (click)="clearFile()">Tilføj emne</button>
+    </div>
+    <div class="form-group">
+      <label for="spørgsmål">spørgsmål</label>
+      <input class="form-control" type="text" id="spørgsmål" placeholder="spørgsmål">
+    </div>
+    <div class="form-group">
+      <h3 class="text-center">Svar muligheder</h3>
+    </div>
+    <div class="form-group">
+      <label for="type">Type</label>
+      <select class="form-control" id="type">
+        <option>
+          2 svar
+        </option>
+        <option>
+          4 svar
+        </option>
+      </select>
+    </div>
+
+    <div>
+      <div class="col-md-5">
+        <label for="spørgsmål1">Spørgsmål 1</label>
+      </div>
+      <div class="col-md-1"></div>
+      <div class="col-md-5">
+        <label for="spørgsmål2">Spørgsmål 2</label>
+      </div>
+    </div>
+
+    <div class="form-horizontal">
+      <div class="col-md-5">
+        <input type="text" placeholder="Spørgsmål 1" id="spørgsmål1">
+        <input type="checkbox">Rigtig?
+      </div>
+      <div class="col-md-1"></div>
+      <div class="col-md-5">
+        <input type="text" placeholder="Spørgsmål 2">
+        <input class="" type="checkbox"> Rigtig?
+      </div>
+    </div>
+
+
+    <div class="form-group">
+      <button type="submit" class="btn btn-success form-control">Tilføj til spil
+        <i class="fa fa-spinner fa-spin fa-fw" *ngIf="loading"></i>
+      </button>
+    </div>
+
+  </form>
+</div>
+<div class="backdrop" [ngStyle]="{'display':display}"></div>
+
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display}">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeModalDialog()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" >Rent Bike</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="closeModalDialog()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="col-md-3"></div>

@@ -1,8 +1,11 @@
 const models = require('express').Router();
 
-const post = require('./post');
+const topic = require('./emner');
+const question = require('./spørgsmål');
 
-models.post('/', post);
+models.use('/topic', topic);
+
+models.use('/question', question);
 
 
 

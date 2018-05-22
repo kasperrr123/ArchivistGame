@@ -3,15 +3,16 @@ import { Http } from '@angular/http';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 
 @Component({
-  selector: 'TestUpload',
-  templateUrl: './TestUpload.component.html',
-  styleUrls: ['./TestUpload.component.css']
+  selector: 'AddGame',
+  templateUrl: './AddGame.component.html',
+  styleUrls: ['./AddGame.component.css']
 })
-export class TestUploadComponent implements OnInit {
+export class AddGameComponent implements OnInit {
   url: string = "http://localhost:3000/UploadPicture/question/";
   form: FormGroup;
   loading: boolean = false;
   formData: FormData = new FormData();
+  display='none';
 
   @ViewChild('fileInput') fileInput: ElementRef;
 
@@ -34,6 +35,14 @@ export class TestUploadComponent implements OnInit {
 
   }
   ngOnInit() {
+  }
+  
+  openModalDialog(){
+    this.display='block';
+  }
+
+  closeModalDialog(){
+    this.display = 'none';
   }
   clearFile() {
     this.form.get('picture').setValue(null);

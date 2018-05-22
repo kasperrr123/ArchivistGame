@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { NavMenuComponent } from './NavMenu/NavMenu.component';
 import { HomeComponent} from './Home/Home.component';
 import { TestUploadComponent } from './TestUpload/TestUpload.component';
+import { AddGameComponent } from './AddGame/AddGame.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { TestUploadComponent } from './TestUpload/TestUpload.component';
     NavMenuComponent,
     HomeComponent,
     TestUploadComponent,
+    AddGameComponent
 ],
   imports: [
     BrowserModule,
@@ -27,6 +29,7 @@ import { TestUploadComponent } from './TestUpload/TestUpload.component';
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'home', component: HomeComponent },
       { path: 'TestUpload', component: TestUploadComponent },
+      { path: 'addGame', component: AddGameComponent },
       { path: '**', redirectTo: 'home' }
 
     ])
