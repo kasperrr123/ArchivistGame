@@ -14,7 +14,6 @@ module.exports = pictures.post('/', (req, res) => {
         fs.rename(oldpath, newpath, function (err) {
             if (err) console.log(err);
             res.status(200).json(newpath);
-
         });
     });
 });

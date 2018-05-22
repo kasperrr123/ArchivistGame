@@ -1,7 +1,7 @@
 ﻿const routes = require('express').Router();
 
-const emne = require('../models/Emne');
-const scoreboard = require('../models/Scoreboard');
+const emne = require('./Emne');
+const scoreboard = require('./Scoreboard');
 const spørgsmål = require('./Spørgsmål');
 const svar = require('./Svar');
 const user = require('./User')
