@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Net;
+using System.IO;
 using System.Threading.Tasks;
 using ArchivistGame.models;
 using Newtonsoft.Json;
@@ -10,28 +12,37 @@ namespace ArchivistGame
 
     class ServerConnection
     {
-        public List<Bike> Bikes { get; set; }
+        public List<Bike> Topics { get; set; }
 
+        public List<Question> Questions { get; set; }
+
+        public string url = "http://100.72.68.190" + ":3000";
         public ServerConnection()
         {
-            Bikes = new List<Bike>();
-            GetRequestBike();
+            Topics = GetTopics();
+
         }
-       
-        public async Task GetRequestBike()
+
+
+        public List<Bike> GetTopics()
         {
             // Create a New HttpClient object.
-            HttpClient client = new HttpClient();
+            WebClient client = new WebClient();
+
+            Stream stream = client.OpenRead(url + "/bikes");
+            StreamReader reader = new StreamReader(stream);
+
+            string json = reader.ReadToEnd();
 
             // Call asynchronous network methods in a try/catch block to handle exceptions
             try
             {
-               
+
                 List<Bike> listofBikes = new List<Bike>();
-                HttpResponseMessage response = await client.GetAsync("http://100.72.15.51:3000/bikes");
-                response.EnsureSuccessStatusCode();
-                string json_result = await response.Content.ReadAsStringAsync();
-                dynamic bikes = JsonConvert.DeserializeObject<dynamic>(json_result);
+                //HttpResponseMessage response = await client.GetAsync("http://100.72.15.51:3000/bikes");
+                ////response.EnsureSuccessStatusCode();
+                //string json_result = await response.Content.ReadAsStringAsync();
+                dynamic bikes = JsonConvert.DeserializeObject<dynamic>(json);
                 foreach (var item in bikes)
                 {
                     listofBikes.Add(new Bike
@@ -45,8 +56,9 @@ namespace ArchivistGame
                         available = item.available
                     });
                 }
-
-                ForwardList(listofBikes);
+                Console.WriteLine(listofBikes);
+                stream.Close();
+                return listofBikes;
 
             }
             catch (HttpRequestException e)
@@ -59,13 +71,36 @@ namespace ArchivistGame
             // Need to call dispose on the HttpClient object
             // when done using it, so the app doesn't leak resources
             client.Dispose();
-           
+            return null;
         }
 
-
-        private void ForwardList(List<Bike> listofBikes)
+        public List<Question> GetQuestions()
         {
-            Bikes = listofBikes;
+            WebClient client = new WebClient();
+            Stream stream = client.OpenRead(url + "/questions");
+            StreamReader reader = new StreamReader(stream);
+            string json = reader.ReadToEnd();
+
+
+            List<Question> ListOfQuestions = new List<Question>();
+
+            dynamic questions = JsonConvert.DeserializeObject<dynamic>(json);
+            foreach (var item in questions)
+            {
+                ListOfQuestions.Add(new Question
+                {
+                    Question_name = item.question,
+                    Image_path = item.image_path,
+                });
+            }
+            stream.Close();
+            return ListOfQuestions;
+
+
+
         }
+
+
+
     }
 }
