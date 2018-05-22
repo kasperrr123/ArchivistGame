@@ -10,8 +10,10 @@ using Newtonsoft.Json;
 namespace ArchivistGame
 {
 
-    class ServerConnection
+   public class ServerConnection
     {
+        private static ServerConnection instance;
+
         public List<Bike> Topics { get; set; }
 
         public List<Question> Questions { get; set; }
@@ -21,6 +23,18 @@ namespace ArchivistGame
         {
             Topics = GetTopics();
 
+        }
+
+        public static ServerConnection Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new ServerConnection();
+                }
+                return instance;
+            }
         }
 
 
@@ -74,24 +88,27 @@ namespace ArchivistGame
             return null;
         }
 
-        public List<Question> GetQuestions()
+        public List<Question> GetQuestions(string Topic_Name)
         {
             WebClient client = new WebClient();
             Stream stream = client.OpenRead(url + "/questions");
             StreamReader reader = new StreamReader(stream);
             string json = reader.ReadToEnd();
 
-
             List<Question> ListOfQuestions = new List<Question>();
 
             dynamic questions = JsonConvert.DeserializeObject<dynamic>(json);
             foreach (var item in questions)
             {
-                ListOfQuestions.Add(new Question
+                if (item.topic == Topic_Name)
                 {
-                    Question_name = item.question,
-                    Image_path = item.image_path,
-                });
+                    ListOfQuestions.Add(new Question
+                    {
+                        Question_name = item.question,
+                        Image_path = item.image_path,
+                    });
+                }
+               
             }
             stream.Close();
             return ListOfQuestions;

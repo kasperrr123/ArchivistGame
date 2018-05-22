@@ -25,18 +25,18 @@
             <!--Question area-->
             <Grid Grid.Row="4" Grid.Column="3" Grid.ColumnSpan="2">
                 <StackLayout BackgroundColor="Blue">
-                    <Label Text="Question area"></Label>
+                    <Label Text="{Binding Question_Name}"></Label>
                 </StackLayout>
             </Grid>
             <!--Center photo-->
-            <Image Grid.Row="1" Grid.RowSpan="3" Grid.Column="3" Grid.ColumnSpan="2" Source="Logo.png"></Image>
+            <Image Grid.Row="1" Grid.RowSpan="3" Grid.Column="3" Grid.ColumnSpan="2" Source="{Binding Image_Path}"></Image>
             <!--Player fakta boks-->
             <StackLayout Grid.Row="1" Grid.RowSpan="2" Grid.Column="1" BackgroundColor="Yellow">
                 <Label Text="Player name"></Label>
             </StackLayout>
             <!--Timer area-->
             <StackLayout Grid.Row="4" Grid.Column="1" BackgroundColor="Red">
-                <Label Text="timer"></Label>
+                <Slider x:Name="Timer_Slider" Minimum="0" Maximum="15" ></Slider>
             </StackLayout>
             <!--Question title area-->
             <Label Grid.Row="0" Grid.Column="2" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Grid.ColumnSpan="4" Text="QUESTION title" BackgroundColor="Green"></Label>

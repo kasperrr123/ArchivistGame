@@ -20,8 +20,8 @@ namespace ArchivistGame
 
         public ChooseTopic()
         {
-            server = new ServerConnection();
-            Topics = server.Bikes;
+            server = ServerConnection.Instance;
+            Topics = server.Topics;
             InitializeComponent();
             TopicsTable.ItemsSource = Topics;            
      
@@ -31,7 +31,9 @@ namespace ArchivistGame
         {
 
             ListView view = sender as ListView;
-            Singleton_obj.Instance.Topic = (Bike)view.SelectedItem;
+            var topic = (Bike)view.SelectedItem;
+            Singleton_obj.Instance.Topic = topic;
+            server.GetQuestions(topic.model);
             Navigation.PushAsync(new QuestionPage());
         }
     }

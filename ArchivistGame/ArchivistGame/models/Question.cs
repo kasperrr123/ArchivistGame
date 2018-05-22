@@ -4,11 +4,13 @@ using System.Text;
 
 namespace ArchivistGame.models
 {
-    class Question
+   public class Question
     {
 
         public string Question_name { get; set; }
 
         public string Image_path { get; set; }
+
+        public string Topic { get; set; }
     }
 }
