@@ -1,0 +1,62 @@
+<div class="col-md-8">
+  <div class="row">
+      <div class="container-fluid" id="picture">
+          <h2 class="text-center">Broager landsarkiv - spil indstillinger</h2>
+          <div class="embed-responsive embed-responsive-16by9">
+            <img class="img-thumbnail center-block" width="100%" src="https://i1.wp.com/www.fromtpm.com/wp-content/uploads/2016/12/Quiz-Time.png?zoom=1.25&fit=450%2C253&ssl=1"
+              alt="Billede af en quiz logo">
+          </div> 
+        </div>
+  </div>
+
+
+  <div class="row" *ngIf="loginService.isLoggedIn()">
+    <div class="container-fluid">
+      <div class="col-md-2"></div>
+    <div class="col-md-8">
+        <h2 class="text-center">Du er logget ind som: </h2>
+        <h2 class="text-center">{{username}}</h2>
+    </div>
+    <div class="col-md-3"></div>
+    </div>
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+      <button (click)="logout()" class="btn btn-primary btn-block center-block ">logud</button>
+    </div>
+    <div class="col-md-3"></div>
+  </div>
+
+  <form name="form" *ngIf="!loginService.isLoggedIn()">
+
+
+    <div class="form-horizontal" id="labels">
+      <div class="col-md-2"></div>
+      <div class="col-md-3">
+        <label for="username" id="usernamelabel">Email</label>
+      </div>
+      <div class="col-md-1"></div>
+      <div class="col-md-6">
+        <label for="password" id="passwordlabel">Password</label>
+      </div>
+
+    </div>
+
+    <div class="form-horizontal" id="inputs">
+        <div class="col-md-2"></div>
+
+      <div class="col-md-3">
+        <input type="text" name="username" placeholder="Email" id="emailinput" #username/>
+      </div>
+      <div class="col-md-1"></div>
+      <div class="col-md-3">
+        <input type="password" name="password" placeholder="Password" id="passwordinput" #password/>
+      </div>
+      <div class="col-md-1"></div>
+      <div class="col-md-2">
+        <button (click)="login(username.value,password.value)" class="btn btn-primary">Login</button>
+      </div>
+    </div>
+
+  </form>
+</div>
+<div class="col-md-2"></div>

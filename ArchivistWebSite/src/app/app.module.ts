@@ -1,0 +1,37 @@
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
+import { RouterModule } from '@angular/router';
+
+import { AppComponent } from './app.component';
+import { NavMenuComponent } from './NavMenu/NavMenu.component';
+import { HomeComponent} from './Home/Home.component';
+import { TestUploadComponent } from './TestUpload/TestUpload.component';
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    NavMenuComponent,
+    HomeComponent,
+    TestUploadComponent,
+],
+  imports: [
+    BrowserModule,
+    CommonModule,
+    HttpModule,
+    FormsModule,
+    ReactiveFormsModule,
+    RouterModule.forRoot([
+      { path: '', redirectTo: 'home', pathMatch: 'full' },
+      { path: 'home', component: HomeComponent },
+      { path: 'TestUpload', component: TestUploadComponent },
+      { path: '**', redirectTo: 'home' }
+
+    ])
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
