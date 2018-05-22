@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ArchivistGame.models
 {
-    class Bike
+    public class Bike
     {
 
         public string id { get; set; }

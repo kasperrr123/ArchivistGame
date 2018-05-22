@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:ArchivistGame.Listview"
              x:Class="ArchivistGame.ChooseTopic">
     <ContentPage.Content>
         <Grid>
@@ -18,16 +19,28 @@
             <StackLayout  Grid.Row="0" Grid.ColumnSpan="4" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
                 <Label Text="Vælg emne"></Label>
             </StackLayout>
-            <StackLayout Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2">
-                <TableView x:Name="TopicsTable">
+            <StackLayout Grid.Row="1" Grid.RowSpan="2" Grid.Column="1" Grid.ColumnSpan="2">
+                <ListView x:Name="TopicsTable" ItemSelected="TopicsTable_ItemSelected">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout x:Name="stacklayoutRow" BackgroundColor="#eee"
+						Orientation="Vertical">
+                                    <StackLayout Orientation="Horizontal">
+                                        <Image Source="Logo.png" HeightRequest="75" WidthRequest="75" />
+                                        <Label Text="{Binding model}" TextColor="#f35e20" />
+                                    </StackLayout>
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
 
-                        
-                </TableView>
+                </ListView>
             </StackLayout>
             <StackLayout Grid.Row="2">
-                
+
             </StackLayout>
-            
+
         </Grid>
     </ContentPage.Content>
 </ContentPage>

@@ -24,9 +24,9 @@ namespace ArchivistGame
 
         private void GoToChooseTopicPage_Clicked(object sender, EventArgs e)
         {
-
-          
-
+            
+           
+            Singleton_obj.Instance.Playername = Playername_Field.Text;
             Navigation.PushAsync(new ChooseTopic());
         }
     }

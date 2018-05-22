@@ -30,7 +30,7 @@
             <Label Text="Lokal arkiv quiz spil"></Label>
         </StackLayout>
         <StackLayout Grid.Row="3" Grid.Column="1"  Grid.ColumnSpan="2">
-            <Entry Placeholder="Skriv dit spiller navn her"></Entry>
+            <Entry x:Name="Playername_Field" Placeholder="Skriv dit spiller navn her"></Entry>
             <Button x:Name="GoToChooseTopicPage" Text="Start" Clicked="GoToChooseTopicPage_Clicked"></Button>
         </StackLayout>
 

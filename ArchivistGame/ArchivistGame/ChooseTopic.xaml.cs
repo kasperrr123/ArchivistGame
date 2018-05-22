@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ArchivistGame.Listview;
+using ArchivistGame.models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,37 +14,27 @@ namespace ArchivistGame
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ChooseTopic : ContentPage
     {
+        public List<Bike> Topics { get; set; }
 
         private ServerConnection server;
 
         public ChooseTopic()
         {
+            server = ServerConnection.Instance;
+            Topics = server.Topics;
             InitializeComponent();
-            server = new ServerConnection();
-
-            FillTopicsTable();
+            TopicsTable.ItemsSource = Topics;            
+     
         }
 
-        private void FillTopicsTable()
+        private void TopicsTable_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-            // create a TableSection to hold the cells
-            var section = new TableSection("Topics");
-            foreach (var bikes in server.Bikes)
-            {
 
-                // populate Data on TableView
-                var id = bikes.id;
-                var type = bikes.type;
-                var model = bikes.model;
-                var price = bikes.price;
-                var gender = bikes.gender;
-
-                var cell = new TextCell { Text = id, Detail = model };
-                section.Add(cell);
-            }
-
-            // add the section to the TableView root
-            TopicsTable.Root.Add(section);
+            ListView view = sender as ListView;
+            var topic = (Bike)view.SelectedItem;
+            Singleton_obj.Instance.Topic = topic;
+            server.GetQuestions(topic.model);
+            Navigation.PushAsync(new QuestionPage());
         }
     }
 }

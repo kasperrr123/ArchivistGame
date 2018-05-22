@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ArchivistGame.QuestionPage">
+    <ContentPage.Content>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="30"></ColumnDefinition>
+                <ColumnDefinition Width="125"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="125"></ColumnDefinition>
+                <ColumnDefinition Width="30"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="50"></RowDefinition>
+            </Grid.RowDefinitions>
+            <!--Question area-->
+            <Grid Grid.Row="4" Grid.Column="3" Grid.ColumnSpan="2">
+                <StackLayout BackgroundColor="Blue">
+                    <Label Text="{Binding Question_Name}"></Label>
+                </StackLayout>
+            </Grid>
+            <!--Center photo-->
+            <Image Grid.Row="1" Grid.RowSpan="3" Grid.Column="3" Grid.ColumnSpan="2" Source="{Binding Image_Path}"></Image>
+            <!--Player fakta boks-->
+            <StackLayout Grid.Row="1" Grid.RowSpan="2" Grid.Column="1" BackgroundColor="Yellow">
+                <Label Text="Player name"></Label>
+            </StackLayout>
+            <!--Timer area-->
+            <StackLayout Grid.Row="4" Grid.Column="1" BackgroundColor="Red">
+                <Slider x:Name="Timer_Slider" Minimum="0" Maximum="15" ></Slider>
+            </StackLayout>
+            <!--Question title area-->
+            <Label Grid.Row="0" Grid.Column="2" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Grid.ColumnSpan="4" Text="QUESTION title" BackgroundColor="Green"></Label>
+            <!--Fakta boks i højre side-->
+            <StackLayout Grid.Row="1" Grid.RowSpan="2" Grid.Column="6"  BackgroundColor="Gray">
+                <Label HorizontalTextAlignment="Center" Text="Vidste du at"></Label>
+            </StackLayout>
+            <!--Næste spørgsmål knappe-->
+            <Button Grid.Row="4" Grid.Column="6" Text="Gå videre" BackgroundColor="Aquamarine"></Button>
+
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
