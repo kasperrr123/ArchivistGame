@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ArchivistGame.SettingsFunction;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,12 +13,13 @@ namespace ArchivistGame
 		public MainPage()
 		{
 			InitializeComponent();
+            Singleton_obj.Instance.Reset();
 		}
 
 
         void OnImageNameTapped(object sender, EventArgs args)
         {
-            DisplayAlert("Yes!", "TODO Settings page", "Ok");
+            Navigation.PushAsync(new Settings());
         }
 
 

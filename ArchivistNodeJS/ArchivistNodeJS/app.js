@@ -19,7 +19,7 @@ app.use(bodyParser.json());
 app.use(busboy());
 app.use(allowCrossDomain);
 
-mongoose.connect('mongodb://localhost:27017/ArchivistGame')
+mongoose.connect('mongodb://100.72.68.190:27017/ArchivistGame')
 
 
 routes.use(function (req, res, next) {

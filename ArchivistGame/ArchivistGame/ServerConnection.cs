@@ -10,18 +10,24 @@ using Newtonsoft.Json;
 namespace ArchivistGame
 {
 
-   public class ServerConnection
+    public class ServerConnection
     {
         private static ServerConnection instance;
+        private readonly WebClient Client;
 
-        public List<Bike> Topics { get; set; }
+
+        public List<Emne> Topics { get; set; }
 
         public List<Question> Questions { get; set; }
 
-        public string url = "http://100.72.68.190" + ":3000";
+        private string json;
+
+        public string IP { get; set; } = "http://100.72.18.123";
+        public int PORT { get; set; } = 3000;
         public ServerConnection()
         {
-            Topics = GetTopics();
+            Topics = new List<Emne>();
+            Client = new WebClient();
 
         }
 
@@ -38,41 +44,44 @@ namespace ArchivistGame
         }
 
 
-        public List<Bike> GetTopics()
+        public List<Emne> GetTopics()
         {
             // Create a New HttpClient object.
-            WebClient client = new WebClient();
 
-            Stream stream = client.OpenRead(url + "/bikes");
-            StreamReader reader = new StreamReader(stream);
+            try
+            {
+                Stream stream = Client.OpenRead(IP + ":" + PORT + "/emner");
+                StreamReader reader = new StreamReader(stream);
+                json = reader.ReadToEnd();
+                stream.Close();
 
-            string json = reader.ReadToEnd();
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+          
 
             // Call asynchronous network methods in a try/catch block to handle exceptions
             try
             {
 
-                List<Bike> listofBikes = new List<Bike>();
-                //HttpResponseMessage response = await client.GetAsync("http://100.72.15.51:3000/bikes");
+                List<Emne> listOfEmner = new List<Emne>();
+                //HttpResponseMessage response = await client.GetAsync("http://100.72.15.51:/bikes");
                 ////response.EnsureSuccessStatusCode();
                 //string json_result = await response.Content.ReadAsStringAsync();
-                dynamic bikes = JsonConvert.DeserializeObject<dynamic>(json);
-                foreach (var item in bikes)
+                dynamic emner = JsonConvert.DeserializeObject<dynamic>(json);
+                foreach (var item in emner)
                 {
-                    listofBikes.Add(new Bike
+                    listOfEmner.Add(new Emne
                     {
-                        id = item.id,
-                        type = item.type,
-                        model = item.model,
-                        price = item.price,
-                        stelid = item.stelid,
-                        gender = item.gender,
-                        available = item.available
+                        Emne_Navn = item.emne,
+                        Emne_Beskrivelse = item.beskrivelse,
+                        Antal_Brugt = item.antalBrugt,
+                        Image_path = item.billede
                     });
                 }
-                Console.WriteLine(listofBikes);
-                stream.Close();
-                return listofBikes;
+                return listOfEmner;
 
             }
             catch (HttpRequestException e)
@@ -84,34 +93,83 @@ namespace ArchivistGame
 
             // Need to call dispose on the HttpClient object
             // when done using it, so the app doesn't leak resources
-            client.Dispose();
+            Client.Dispose();
             return null;
         }
 
-        public List<Question> GetQuestions(string Topic_Name)
+        public List<Question> GetQuestions(string Emne_navn)
         {
-            WebClient client = new WebClient();
-            Stream stream = client.OpenRead(url + "/questions");
-            StreamReader reader = new StreamReader(stream);
-            string json = reader.ReadToEnd();
+          
+            try
+            {
+                Stream stream = Client.OpenRead(IP + ":" + PORT + "/question");
+                StreamReader reader = new StreamReader(stream);
+                json = reader.ReadToEnd();
+                stream.Close();
+
+            }
+            catch (Exception)
+            {
+                return null;
+            }
 
             List<Question> ListOfQuestions = new List<Question>();
 
             dynamic questions = JsonConvert.DeserializeObject<dynamic>(json);
-            foreach (var item in questions)
+            foreach (var question in questions)
             {
-                if (item.topic == Topic_Name)
+                if (question.emne == Emne_navn)
                 {
                     ListOfQuestions.Add(new Question
                     {
-                        Question_name = item.question,
-                        Image_path = item.image_path,
+                        Question_navn = question.spørgsmål,
+                        Emne = question.emne,
+                        Image_path = question.billede,
+                        Fact = question.fakta,
                     });
                 }
-               
+
             }
-            stream.Close();
             return ListOfQuestions;
+
+
+
+        }
+
+        public List<Svar> GetAnswers(string spørgsmål)
+        {
+
+         
+            try
+            {
+                Stream stream = Client.OpenRead(IP + ":" + PORT + "/svar");
+                StreamReader reader = new StreamReader(stream);
+                json = reader.ReadToEnd();
+                stream.Close();
+
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+
+            List<Svar> svarMuligheder = new List<Svar>();
+
+            dynamic svar = JsonConvert.DeserializeObject<dynamic>(json);
+            foreach (var svar_mulighed in svar)
+            {
+                if (svar_mulighed.spørgsmål == spørgsmål)
+                {
+                    svarMuligheder.Add(new Svar
+                    {
+                        Rigtig = svar_mulighed.rigtig,
+                        Svar_navn = svar_mulighed.svar,
+                        Spørgsmål_navn = svar_mulighed.spørgsmål,
+                    });
+                }
+
+            }
+            return svarMuligheder;
 
 
 

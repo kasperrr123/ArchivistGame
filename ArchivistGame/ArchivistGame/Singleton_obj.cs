@@ -11,9 +11,17 @@ namespace ArchivistGame
 
         public string Playername { get; set; }
 
-        public Bike Topic { get; set; }
+        public int Points { get; set; }
+        public int Antal_Rigtige { get; set; }
 
-        private Singleton_obj() { }
+        public Emne Emne { get; set; }
+
+        private Singleton_obj()
+        {
+            Points = 0;
+            Antal_Rigtige = 0;
+
+        }
 
         public static Singleton_obj Instance
         {
@@ -25,6 +33,13 @@ namespace ArchivistGame
                 }
                 return instance;
             }
+        }
+
+
+
+        internal void Reset()
+        {
+            instance = new Singleton_obj();
         }
     }
 }
