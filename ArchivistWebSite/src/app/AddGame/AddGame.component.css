@@ -1,0 +1,36 @@
+@media (min-width:768px){
+    #labels{
+        margin-top: 10px;
+        margin-bottom: 5px;
+    }
+    #hiddencontainer{
+        margin-top: 100px;
+    }
+    #inputs{
+        margin-bottom: 10px;
+    }
+    #svar1{
+        margin-bottom: 5px;
+    }
+    #svar2{
+        margin-bottom: 5px;
+    }
+    #svar3{
+        margin-bottom: 5px;
+    }
+    #svar4{
+        margin-bottom: 5px;
+    }
+}
+@media (max-width: 767px) {
+
+    #labels {
+        display: none;
+        z-index: -1;
+    }
+    #inputs {
+      margin-top: 2px;
+      margin-bottom: 2px;
+    }
+  
+}

@@ -9,7 +9,7 @@
           vælg emne
         </option>
       </select>
-      <button type="button" class="btn btn-sm btn-success pull-right" (click)="clearFile()">Tilføj emne</button>
+      <button type="button" class="btn btn-sm btn-success pull-right" (click)="openModalDialog()">Tilføj emne</button>
     </div>
     <div class="form-group">
       <label for="spørgsmål">spørgsmål</label>
@@ -30,26 +30,49 @@
       </select>
     </div>
 
-    <div>
+    <div id="labels">
       <div class="col-md-5">
-        <label for="spørgsmål1">Spørgsmål 1</label>
+        <label for="svar1">Svar 1</label>
       </div>
       <div class="col-md-1"></div>
       <div class="col-md-5">
-        <label for="spørgsmål2">Spørgsmål 2</label>
+        <label for="svar2">Svar 2</label>
       </div>
     </div>
 
-    <div class="form-horizontal">
+    <div class="form-horizontal" id="inputs">
       <div class="col-md-5">
-        <input type="text" placeholder="Spørgsmål 1" id="spørgsmål1">
+        <input type="text" placeholder="svar 1" id="svar1">
         <input type="checkbox">Rigtig?
       </div>
       <div class="col-md-1"></div>
       <div class="col-md-5">
-        <input type="text" placeholder="Spørgsmål 2">
-        <input class="" type="checkbox"> Rigtig?
+        <input type="text" placeholder="svar 2" id="svar2">
+        <input type="checkbox">Rigtig?
       </div>
+    </div>
+    <div *ngIf="questions" >
+        <div id="labels">
+            <div class="col-md-5">
+              <label for="svar3">Svar 3</label>
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-5">
+              <label for="svar4">Svar 4</label>
+            </div>
+          </div>
+      
+          <div class="form-horizontal" id="inputs">
+            <div class="col-md-5">
+              <input type="text" placeholder="svar 3" id="svar3">
+              <input type="checkbox">Rigtig?
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-5">
+              <input type="text" placeholder="svar 4" id="svar4">
+              <input type="checkbox">Rigtig?
+            </div>
+          </div>
     </div>
 
 
@@ -75,7 +98,7 @@
       <div class="modal-body">
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" >Rent Bike</button>
+        <button type="button" class="btn btn-primary">Tilføj Emne</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="closeModalDialog()">Close</button>
       </div>
     </div>

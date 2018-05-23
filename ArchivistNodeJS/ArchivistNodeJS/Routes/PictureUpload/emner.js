@@ -13,7 +13,7 @@ module.exports = pictures.post('/', (req, res) => {
         var newpath = __dirname + '/Emner/' + files.file.name;
         fs.rename(oldpath, newpath, function (err) {
             if (err) console.log(err);
-            res.status(200).json(newpath);
+            res.status(200).json('localhost:3000/' + files.file.name);
         });
     });
 });

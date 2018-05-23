@@ -13,6 +13,7 @@ export class AddGameComponent implements OnInit {
   loading: boolean = false;
   formData: FormData = new FormData();
   display='none';
+  questions = true;
 
   @ViewChild('fileInput') fileInput: ElementRef;
 
