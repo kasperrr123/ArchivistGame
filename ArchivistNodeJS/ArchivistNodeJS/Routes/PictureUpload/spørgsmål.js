@@ -11,9 +11,10 @@ module.exports = pictures.post('/', (req, res) => {
     form.parse(req, function (err, fields, files) {
         var oldpath = files.file.path;
         var newpath = __dirname + '/Spørgsmål/' + files.file.name;
+        
         fs.rename(oldpath, newpath, function (err) {
             if (err) console.log(err);
-            res.status(200).json(newpath);
+            res.status(200).json('localhost:3000/' + files.file.name);
 
         });
     });
