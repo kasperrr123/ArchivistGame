@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -12,7 +13,10 @@ namespace ArchivistGame
 	{
 		public MainPage()
 		{
+
 			InitializeComponent();
+            ServerConnection conn = ServerConnection.Instance;
+
             Singleton_obj.Instance.Reset();
 		}
 

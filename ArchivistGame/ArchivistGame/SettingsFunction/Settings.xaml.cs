@@ -1,15 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace ArchivistGame.SettingsFunction
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
+    [XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class Settings : ContentPage
 	{
         public string Current_IP { get; set; }
@@ -26,6 +21,11 @@ namespace ArchivistGame.SettingsFunction
         {
             ServerConnection.Instance.IP = Ip_adresse.Text;
             ServerConnection.Instance.PORT = int.Parse(Port_adresse.Text);
+        }
+
+        private void Cast_Clicked(object sender, EventArgs e)
+        {
+            
         }
     }
 }

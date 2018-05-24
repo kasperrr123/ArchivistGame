@@ -184,7 +184,7 @@ namespace ArchivistGame
 
             if (ListOfQuestions.Count - 1 < counter)
             {
-                DisplayAlert("YES", "DONE", "Ok");
+                Navigation.PushAsync(new SeeScore());
             }
             else
             {

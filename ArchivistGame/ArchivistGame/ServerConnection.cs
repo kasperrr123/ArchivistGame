@@ -60,46 +60,46 @@ namespace ArchivistGame
             {
                 return null;
             }
-          
 
-            // Call asynchronous network methods in a try/catch block to handle exceptions
-            try
+
+            //// Call asynchronous network methods in a try/catch block to handle exceptions
+            //try
+            //{
+
+            List<Emne> listOfEmner = new List<Emne>();
+            //HttpResponseMessage response = await client.GetAsync("http://100.72.15.51:/bikes");
+            ////response.EnsureSuccessStatusCode();
+            //string json_result = await response.Content.ReadAsStringAsync();
+            dynamic emner = JsonConvert.DeserializeObject<dynamic>(json);
+            foreach (var item in emner)
             {
-
-                List<Emne> listOfEmner = new List<Emne>();
-                //HttpResponseMessage response = await client.GetAsync("http://100.72.15.51:/bikes");
-                ////response.EnsureSuccessStatusCode();
-                //string json_result = await response.Content.ReadAsStringAsync();
-                dynamic emner = JsonConvert.DeserializeObject<dynamic>(json);
-                foreach (var item in emner)
+                listOfEmner.Add(new Emne
                 {
-                    listOfEmner.Add(new Emne
-                    {
-                        Emne_Navn = item.emne,
-                        Emne_Beskrivelse = item.beskrivelse,
-                        Antal_Brugt = item.antalBrugt,
-                        Image_path = item.billede
-                    });
-                }
-                return listOfEmner;
-
+                    Emne_Navn = item.emne,
+                    Emne_Beskrivelse = item.beskrivelse,
+                    Antal_Brugt = item.antalBrugt,
+                    Image_path = item.billede
+                });
             }
-            catch (HttpRequestException e)
-            {
-                Console.WriteLine("\nException Caught!");
-                Console.WriteLine("Message :{0} ", e.Message);
-            }
+            return listOfEmner;
+
+            //}
+            //catch (HttpRequestException e)
+            //{
+            //    Console.WriteLine("\nException Caught!");
+            //    Console.WriteLine("Message :{0} ", e.Message);
+            //}
 
 
-            // Need to call dispose on the HttpClient object
-            // when done using it, so the app doesn't leak resources
-            Client.Dispose();
-            return null;
+            //// Need to call dispose on the HttpClient object
+            //// when done using it, so the app doesn't leak resources
+            //Client.Dispose();
+            //return null;
         }
 
         public List<Question> GetQuestions(string Emne_navn)
         {
-          
+
             try
             {
                 Stream stream = Client.OpenRead(IP + ":" + PORT + "/question");
@@ -139,7 +139,7 @@ namespace ArchivistGame
         public List<Svar> GetAnswers(string spørgsmål)
         {
 
-         
+
             try
             {
                 Stream stream = Client.OpenRead(IP + ":" + PORT + "/svar");
