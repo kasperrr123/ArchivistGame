@@ -23,7 +23,7 @@ module.exports = users.post('/login', bodyParser, (req, res) => {
                             type:person.type
                         }
                         var message = 200;
-                        var token = jwt.sign(payload,'secret',{expiresIn:60*3})
+                        var token = jwt.sign(payload,'secret',{expiresIn:60*60*24})
                         res.status(message).json({success:'access granted',token:token});
                     } else {
                         message = 211;

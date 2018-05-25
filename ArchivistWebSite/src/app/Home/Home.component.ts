@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../login.service';
+import { FormBuilder, FormGroup, Validators, AbstractControl } from "@angular/forms";
 import { User } from '../../Models/User.model';
 import { Http } from '@angular/http';
 @Component({
@@ -10,12 +11,21 @@ import { Http } from '@angular/http';
 export class HomeComponent implements OnInit {
   http: Http;
   username: string;
-  constructor(public loginService: LoginService) {
+  form: FormGroup;
+
+  constructor(public loginService: LoginService, public fb:FormBuilder) {
     if (loginService.isLoggedIn()) {
       var user = loginService.User();
       this.username = user;
     }
   }
+  createForm() {
+    this.form = this.fb.group({
+      username: [null,Validators.required],
+      password:[null,Validators.required]
+    });
+  }
+
   login(username: string, password: string): boolean {
     this.username = username;
     if (!this.loginService.login(username, password)) {
@@ -30,6 +40,7 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.createForm();
   }
 
 }
