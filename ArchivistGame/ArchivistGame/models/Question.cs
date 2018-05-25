@@ -7,10 +7,12 @@ namespace ArchivistGame.models
    public class Question
     {
 
-        public string Question_name { get; set; }
+        public string Question_navn { get; set; }
 
         public string Image_path { get; set; }
 
-        public string Topic { get; set; }
+        public string Emne { get; set; }
+
+        public string Fact { get; set; }
     }
 }

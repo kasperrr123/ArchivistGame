@@ -14,26 +14,31 @@ namespace ArchivistGame
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ChooseTopic : ContentPage
     {
-        public List<Bike> Topics { get; set; }
+        public List<Emne> Topics { get; set; }
 
         private ServerConnection server;
+
 
         public ChooseTopic()
         {
             server = ServerConnection.Instance;
-            Topics = server.Topics;
+            Topics = server.GetTopics();
+            if (Topics == null)
+            {
+                DisplayAlert("Hov!", "Der er ingen forbindelse til serveren", "Ok");
+                Navigation.PushAsync(new MainPage());
+            }
             InitializeComponent();
-            TopicsTable.ItemsSource = Topics;            
-     
+            TopicsTable.ItemsSource = Topics;
+
         }
 
         private void TopicsTable_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
 
             ListView view = sender as ListView;
-            var topic = (Bike)view.SelectedItem;
-            Singleton_obj.Instance.Topic = topic;
-            server.GetQuestions(topic.model);
+            var emne = (Emne)view.SelectedItem;
+            Singleton_obj.Instance.Emne = emne;
             Navigation.PushAsync(new QuestionPage());
         }
     }

@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ArchivistGame.SettingsFunction.Settings">
+    <ContentPage.Content>
+
+        <StackLayout>
+            <Label Text="Forbindelses indstillinger"></Label>
+            <Entry Keyboard="Numeric" x:Name="Ip_adresse" Text="{Binding current_IP}" Placeholder="Ip"></Entry>
+            <Entry Keyboard="Numeric" x:Name="Port_adresse" Text="{Binding current_PORT}" Placeholder="Port"></Entry>
+            <Button x:Name="Ændre_indstillinger_Btn" Clicked="Ændre_indstillinger_Btn_Clicked" Text="Ændre indstillinger"></Button>
+            <Button Text="Cast" Clicked="Cast_Clicked"></Button>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

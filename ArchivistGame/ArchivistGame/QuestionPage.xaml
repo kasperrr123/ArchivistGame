@@ -20,32 +20,53 @@
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
-                <RowDefinition Height="50"></RowDefinition>
+                <RowDefinition Height="40"></RowDefinition>
             </Grid.RowDefinitions>
-            <!--Question area-->
+            <!--svar muligheder area-->
             <Grid Grid.Row="4" Grid.Column="3" Grid.ColumnSpan="2">
-                <StackLayout BackgroundColor="Blue">
-                    <Label Text="{Binding Question_Name}"></Label>
+                <StackLayout >
+                    <StackLayout x:Name="svarMuligheder_row1" Orientation="Horizontal" VerticalOptions="CenterAndExpand">
+                        <Button x:Name="btn_1" Text="{Binding Svar_1}" Clicked="Svar_clicked"  BackgroundColor="LightBlue" HorizontalOptions="FillAndExpand"></Button>
+                        <Button x:Name="btn_2" Text="{Binding Svar_2}" Clicked="Svar_clicked" BackgroundColor="LightBlue" HorizontalOptions="FillAndExpand"></Button>
+                    </StackLayout>
+                    <StackLayout x:Name="svarMuligheder_row2" Orientation="Horizontal" VerticalOptions="CenterAndExpand">
+                        <Button x:Name="btn_3" Text="{Binding Svar_3}" Clicked="Svar_clicked" BackgroundColor="LightBlue" HorizontalOptions="FillAndExpand"></Button>
+                        <Button x:Name="btn_4" Text="{Binding Svar_4}" Clicked="Svar_clicked" BackgroundColor="LightBlue" HorizontalOptions="FillAndExpand"></Button>
+                    </StackLayout>
                 </StackLayout>
             </Grid>
             <!--Center photo-->
-            <Image Grid.Row="1" Grid.RowSpan="3" Grid.Column="3" Grid.ColumnSpan="2" Source="{Binding Image_Path}"></Image>
+            <Image Grid.Row="1" Grid.RowSpan="3" Grid.Column="3" Grid.ColumnSpan="2" Source="{Binding Image_Path}" Margin="0,0,0,15"></Image>
             <!--Player fakta boks-->
             <StackLayout Grid.Row="1" Grid.RowSpan="2" Grid.Column="1" BackgroundColor="Yellow">
-                <Label Text="Player name"></Label>
+                <Label Text="{Binding Spiller_Navn}" HorizontalTextAlignment="Center"></Label>
+                <Label Text="{Binding Current_Points}" HorizontalTextAlignment="Center" ></Label>
+                <Label Text="{Binding Antal_Rigtige}" HorizontalTextAlignment="Center" ></Label>
+                <Label Text="{Binding Time_Used}" HorizontalTextAlignment="Center" ></Label>
             </StackLayout>
             <!--Timer area-->
-            <StackLayout Grid.Row="4" Grid.Column="1" BackgroundColor="Red">
-                <Slider x:Name="Timer_Slider" Minimum="0" Maximum="15" ></Slider>
+            <StackLayout Grid.Row="4" Grid.Column="1">
+
+                <Slider x:Name="Timer_Slider" Value="{Binding Slider_value}" BackgroundColor="LightBlue" Rotation="-90" Minimum="0" Maximum="15" ></Slider>
+                <Label Text="Points"></Label>
+
             </StackLayout>
             <!--Question title area-->
-            <Label Grid.Row="0" Grid.Column="2" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Grid.ColumnSpan="4" Text="QUESTION title" BackgroundColor="Green"></Label>
+            <Label Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="4" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Text="{Binding Question_Name}" ></Label>
             <!--Fakta boks i højre side-->
-            <StackLayout Grid.Row="1" Grid.RowSpan="2" Grid.Column="6"  BackgroundColor="Gray">
-                <Label HorizontalTextAlignment="Center" Text="Vidste du at"></Label>
-            </StackLayout>
+            <Frame BorderColor="Black" Grid.Row="1" Grid.RowSpan="2" Grid.Column="6">
+                <StackLayout >
+                    <Label HorizontalTextAlignment="Center" Text="Vidste du at: "></Label>
+                    <Label HorizontalTextAlignment="Center" Text="{Binding Fact}"></Label>
+                </StackLayout>
+            </Frame>
+           
             <!--Næste spørgsmål knappe-->
-            <Button Grid.Row="4" Grid.Column="6" Text="Gå videre" BackgroundColor="Aquamarine"></Button>
+            <Image Source="Next.png" Aspect="AspectFit"  Grid.Row="4" x:Name="GåVidere_btn" Grid.Column="5" Grid.ColumnSpan="2" Margin="120,0,0,0">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnImageNameTapped" NumberOfTapsRequired="1" />
+                </Image.GestureRecognizers>
+            </Image>
 
         </Grid>
     </ContentPage.Content>
