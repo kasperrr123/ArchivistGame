@@ -14,6 +14,8 @@ namespace ArchivistGame
         public int Points { get; set; }
         public int Antal_Rigtige { get; set; }
 
+        public int Antal_Spørgsmål { get; set; }
+
         public Emne Emne { get; set; }
 
         private Singleton_obj()

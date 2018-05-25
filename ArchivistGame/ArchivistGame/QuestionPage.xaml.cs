@@ -133,6 +133,7 @@ namespace ArchivistGame
             BindingContext = this;
             server = ServerConnection.Instance;
             ListOfQuestions = server.GetQuestions(Singleton_obj.Instance.Emne.Emne_Navn);
+            Singleton_obj.Instance.Antal_Spørgsmål = ListOfQuestions.Count;
             listOfAnswers = server.GetAnswers(ListOfQuestions[counter].Question_navn);
 
             try
@@ -154,8 +155,8 @@ namespace ArchivistGame
             }
 
             Slider_value = 15;
-            SetAnswers();
             InitializeComponent();
+            SetAnswers();
 
 
         }
@@ -218,6 +219,8 @@ namespace ArchivistGame
                     DisplayAlert("Rigtigt", "Det var det rigtige svar", "Ok");
                     antalrigtige_int++;
                     Antal_Rigtige = "Antal rigtige: " + "\n" + antalrigtige_int + "/" + ListOfQuestions.Count;
+                    Singleton_obj.Instance.Antal_Rigtige++;
+                    Singleton_obj.Instance.Points += 15;
                     correctAnswer = true;
                     break;
                 }

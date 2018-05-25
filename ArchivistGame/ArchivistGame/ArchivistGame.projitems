@@ -24,6 +24,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)models\Score.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)models\Svar.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)models\Emne.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)models\Question.cs" />

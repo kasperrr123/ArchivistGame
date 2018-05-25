@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using pl.droidsonroids.casty;
 
 using Xamarin.Forms;
 
@@ -14,7 +13,7 @@ namespace ArchivistGame
 		{
 			InitializeComponent();
 
-            MainPage = new NavigationPage(new QuestionPage());
+            MainPage = new NavigationPage(new MainPage());
         }
 
 		protected override void OnStart ()

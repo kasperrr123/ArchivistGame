@@ -22,7 +22,7 @@ namespace ArchivistGame
 
         private string json;
 
-        public string IP { get; set; } = "http://100.72.18.123";
+        public string IP { get; set; } = "http://100.72.68.190";
         public int PORT { get; set; } = 3000;
         public ServerConnection()
         {
@@ -51,6 +51,7 @@ namespace ArchivistGame
             try
             {
                 Stream stream = Client.OpenRead(IP + ":" + PORT + "/emner");
+                Client.Proxy = null;
                 StreamReader reader = new StreamReader(stream);
                 json = reader.ReadToEnd();
                 stream.Close();
@@ -175,6 +176,11 @@ namespace ArchivistGame
 
         }
 
+        public string PostToScoreboard (string json)
+        {
+            Client.Headers[HttpRequestHeader.ContentType] = "application/json";
+            return Client.UploadString(IP + ":" +  PORT + "/scoreboard", json);
+        }
 
 
     }

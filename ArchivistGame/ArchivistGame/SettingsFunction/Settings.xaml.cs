@@ -23,9 +23,6 @@ namespace ArchivistGame.SettingsFunction
             ServerConnection.Instance.PORT = int.Parse(Port_adresse.Text);
         }
 
-        private void Cast_Clicked(object sender, EventArgs e)
-        {
-            
-        }
+     
     }
 }

@@ -16,7 +16,6 @@ namespace ArchivistGame
 
 			InitializeComponent();
             ServerConnection conn = ServerConnection.Instance;
-
             Singleton_obj.Instance.Reset();
 		}
 

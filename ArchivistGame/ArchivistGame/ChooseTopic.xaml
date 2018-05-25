@@ -22,24 +22,38 @@
             <StackLayout Grid.Row="1" Grid.RowSpan="2" Grid.Column="1" Grid.ColumnSpan="2">
                 <ListView x:Name="TopicsTable" ItemSelected="TopicsTable_ItemSelected" RowHeight="2" HasUnevenRows="True">
                     <ListView.Header>
-                        <StackLayout Orientation="Horizontal">
-                            <Label Text=""></Label>
-                            <Label Text="Emne"></Label>
-                            <Label Text="Beskrivelse"></Label>
-                        </StackLayout>
-                 
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="50*"></ColumnDefinition>
+                                <ColumnDefinition Width="75*"></ColumnDefinition>
+                                <ColumnDefinition Width="100*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Label Text="" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" Grid.Column="0" FontSize="Medium"/>
+                            <Label Text="Emne" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" TextColor="Red" Grid.Column="1"  FontSize="Medium" />
+                            <Label Text="Beskrivelse" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" TextColor="Blue" Grid.Column="2" FontSize="Medium" />
+                        </Grid>
+                        
                     </ListView.Header>
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
-                                <!--<StackLayout x:Name="stacklayoutRow" BackgroundColor="#eee"
-						Orientation="Vertical">-->
-                                <StackLayout Orientation="Horizontal">
+                                <Grid >
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="50*"></ColumnDefinition>
+                                        <ColumnDefinition Width="75*"></ColumnDefinition>
+                                        <ColumnDefinition Width="100*"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <Image  Source="{Binding Image_path}" WidthRequest="120" HeightRequest="120" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" Grid.Column="0"/>
+                                    <Label Text="{Binding Emne_Navn}" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" Grid.Column="1"  />
+                                    <Label Text="{Binding Emne_Beskrivelse}" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" Grid.Column="2" />
+                                </Grid>
+
+                                <!--<StackLayout Orientation="Horizontal">
                                     <Image Source="{Binding Image_path}" HeightRequest="75" WidthRequest="75"></Image>
                                     <Label Text="{Binding Emne_Navn}"  HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
                                     <Label Text="{Binding Emne_Beskrivelse}"  HorizontalTextAlignment="Center" VerticalTextAlignment="Center"  />
-                                </StackLayout>
-                                <!--</StackLayout>-->
+                                </StackLayout>-->
+
                             </ViewCell>
                         </DataTemplate>
                     </ListView.ItemTemplate>
