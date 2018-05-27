@@ -26,7 +26,7 @@
     <div class="col-md-3"></div>
   </div>
 
-  <form name="form" *ngIf="!loginService.isLoggedIn()">
+  <form name="form" [formGroup]="form" *ngIf="!loginService.isLoggedIn()">
 
 
     <div class="form-horizontal" id="labels">
@@ -45,15 +45,15 @@
         <div class="col-md-2"></div>
 
       <div class="col-md-3">
-        <input type="text" name="username" placeholder="Email" id="emailinput" #username/>
+        <input type="text" name="username" placeholder="Email" id="emailinput" formControlName="username" #username/>
       </div>
       <div class="col-md-1"></div>
       <div class="col-md-3">
-        <input type="password" name="password" placeholder="Password" id="passwordinput" #password/>
+        <input type="password" name="password" placeholder="Password" id="passwordinput" formControlName="password" #password/>
       </div>
       <div class="col-md-1"></div>
       <div class="col-md-2">
-        <button (click)="login(username.value,password.value)" class="btn btn-primary">Login</button>
+        <button (click)="login(username.value,password.value)" [disabled]="!form.valid" class="btn btn-primary">Login</button>
       </div>
     </div>
 

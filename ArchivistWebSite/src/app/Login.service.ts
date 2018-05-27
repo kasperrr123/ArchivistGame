@@ -10,12 +10,21 @@ export class LoginService {
  
   url: string = "http://localhost:3000/users/login";
   user: User;
+  jwtHelper: JwtHelperService = new JwtHelperService();
   constructor(private http: Http) {  }
+
+  public isAuthenticated(): boolean {
+
+    const token = localStorage.getItem('token');
+
+    // Check whether the token is expired and return
+    // true or false
+    return !this.jwtHelper.isTokenExpired(token);
+  }
 
   login(user: string, password: string): boolean {
 
     this.user = new User(user, password, null);
-    alert(this.user);
     this.http.post(this.url, this.user).subscribe(data => {
       if (data.status == 200) {
         alert("Successfully Logged in");
@@ -27,7 +36,8 @@ export class LoginService {
         alert("Wrong Password");
       }
       return false;
-    }, error => { console.log(error) });
+    }, error => { console.log(error);
+      alert("Can't login contact admin"); });
     return false;
 
   }
@@ -37,12 +47,12 @@ export class LoginService {
   }
 
   getUser(): any {
-    const jwtHelper: JwtHelperService = new JwtHelperService();
+    
     const token = localStorage.getItem('token');
-    if (jwtHelper.isTokenExpired(token)) {
+    if (this.jwtHelper.isTokenExpired(token)) {
 
     } else {
-      return jwtHelper.decodeToken(token);
+      return this.jwtHelper.decodeToken(token);
     }
     return localStorage.getItem('token');
 

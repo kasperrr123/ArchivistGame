@@ -1,26 +1,33 @@
 <div class="col-md-2"></div>
 <div class="col-md-6">
   <h1 class="text-center">Tilføj Spil</h1>
-  <form [formGroup]="form" (ngSubmit)="onSubmit()" method="post" enctype="multipart/form-data">
+  <form (ngSubmit)="onSubmit()" method="post" enctype="multipart/form-data">
     <div class="form-group">
-      <label for="emne">Emne</label>
-      <select class="form-control" id="emne">
+      <label for="emne" class="control-label required">Emne</label>
+      <select class="form-control" id="emne" ng-model="emne" ng-options="">
         <option>
           vælg emne
+        </option>
+        <option *ngFor="let emne of listOfEmner" [ngValue]="emne">
+          {{ emne.emne }}
         </option>
       </select>
       <button type="button" class="btn btn-sm btn-success pull-right" (click)="openModalDialog()">Tilføj emne</button>
     </div>
     <div class="form-group">
-      <label for="spørgsmål">spørgsmål</label>
+      <label for="spørgsmål" class="control-label required">spørgsmål</label>
       <input class="form-control" type="text" id="spørgsmål" placeholder="spørgsmål">
+    </div>
+    <div class="form-group">
+      <label for="spørgsmålbillede" class="control-label required">Billede</label>
+      <input class="form-control"  type="file" accept="image/*" id="spørgsmålbillede" (change)="onFileChange($event)" formControlName="emneBillede" #fileInput>
     </div>
     <div class="form-group">
       <h3 class="text-center">Svar muligheder</h3>
     </div>
     <div class="form-group">
       <label for="type">Type</label>
-      <select class="form-control" id="type">
+      <select class="form-control" id="type" (change)="onSelectChange($event)">
         <option>
           2 svar
         </option>
@@ -29,14 +36,13 @@
         </option>
       </select>
     </div>
-
     <div id="labels">
       <div class="col-md-5">
-        <label for="svar1">Svar 1</label>
+        <label for="svar1" class="control-label required">Svar 1</label>
       </div>
       <div class="col-md-1"></div>
       <div class="col-md-5">
-        <label for="svar2">Svar 2</label>
+        <label for="svar2" class="control-label required">Svar 2</label>
       </div>
     </div>
 
@@ -48,31 +54,31 @@
       <div class="col-md-1"></div>
       <div class="col-md-5">
         <input type="text" placeholder="svar 2" id="svar2">
-        <input type="checkbox">Rigtig?
+        <input type="checkbox" id="checkbox2">Rigtig?
       </div>
     </div>
-    <div *ngIf="questions" >
-        <div id="labels">
-            <div class="col-md-5">
-              <label for="svar3">Svar 3</label>
-            </div>
-            <div class="col-md-1"></div>
-            <div class="col-md-5">
-              <label for="svar4">Svar 4</label>
-            </div>
-          </div>
-      
-          <div class="form-horizontal" id="inputs">
-            <div class="col-md-5">
-              <input type="text" placeholder="svar 3" id="svar3">
-              <input type="checkbox">Rigtig?
-            </div>
-            <div class="col-md-1"></div>
-            <div class="col-md-5">
-              <input type="text" placeholder="svar 4" id="svar4">
-              <input type="checkbox">Rigtig?
-            </div>
-          </div>
+    <div *ngIf="questions" id="hiddencontainer">
+      <div id="labels">
+        <div class="col-md-5">
+          <label for="svar3" class="control-label required">Svar 3</label>
+        </div>
+        <div class="col-md-1"></div>
+        <div class="col-md-5">
+          <label for="svar4" class="control-label required">Svar 4</label>
+        </div>
+      </div>
+
+      <div class="form-horizontal" id="inputs">
+        <div class="col-md-5">
+          <input type="text" placeholder="svar 3" id="svar3">
+          <input type="checkbox">Rigtig?
+        </div>
+        <div class="col-md-1"></div>
+        <div class="col-md-5">
+          <input type="text" placeholder="svar 4" id="svar4">
+          <input type="checkbox">Rigtig?
+        </div>
+      </div>
     </div>
 
 
@@ -90,15 +96,29 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Modal title</h5>
+        <h5 class="modal-title">Tilføj Emne</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeModalDialog()">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
+        <form [formGroup]="emneForm" method="post" enctype="multipart/form-data">
+          <div class="form-group">
+            <label class="control-label required" for="emne">Emne</label>
+            <input class="form-control " type="text" id="emne" placeholder="skriv emne" formControlName="emne">
+          </div>
+          <div class="form-group">
+            <label class="control-label required" for="beskrivelse">Beskrivelse</label>
+            <input class="form-control" type="text" id="beskrivelse" placeholder="skriv Beskrivelse"formControlName="beskrivelse">
+          </div>
+          <div class="form-group">
+            <label for="emneBillede">Billede</label>
+            <input class="form-control" type="file" accept="image/*" id="emneBillede" (change)="onEmneFileChange($event)" formControlName="emneBillede" #fileInput>
+          </div>
+        </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary">Tilføj Emne</button>
+        <button type="submit" (click)="addEmne(emneForm.value)" class="btn btn-primary" [disabled]="!emneForm.valid">Tilføj Emne</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="closeModalDialog()">Close</button>
       </div>
     </div>

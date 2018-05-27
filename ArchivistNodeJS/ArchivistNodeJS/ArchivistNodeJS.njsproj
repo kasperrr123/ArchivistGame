@@ -5993,6 +5993,7 @@
   <ItemGroup>
     <Folder Include="bin\" />
     <Folder Include="Models\" />
+    <Folder Include="node_modules\" />
     <Folder Include="node_modules\%40types\" />
     <Folder Include="node_modules\%40types\babel-types\" />
     <Folder Include="node_modules\%40types\babylon\" />
