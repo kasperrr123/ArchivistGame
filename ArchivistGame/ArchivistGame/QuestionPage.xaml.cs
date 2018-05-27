@@ -1,10 +1,12 @@
-﻿using ArchivistGame.models;
+﻿using Android.App;
+using ArchivistGame.models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 using Xamarin.Forms;
@@ -129,6 +131,7 @@ namespace ArchivistGame
         public QuestionPage()
         {
             counter = 0;
+            Singleton_obj.Instance.Antal_Rigtige = 0;
             antalrigtige_int = 0;
             BindingContext = this;
             server = ServerConnection.Instance;
@@ -156,9 +159,53 @@ namespace ArchivistGame
 
             Slider_value = 15;
             InitializeComponent();
+
             SetAnswers();
 
 
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            ShowDisplayAlert();
+        }
+
+        private async void ShowDisplayAlert()
+        {
+            var x = await DisplayAlert("Klar?", "Er du klar til at quizze?", "Ja", "Nej");
+            Console.WriteLine("After displayalert");
+            if (!x)
+            {
+                await Navigation.PushAsync(new MainPage());
+            }
+            else
+            {
+                Console.WriteLine("Im ready to quiz");
+                StartTimer();
+             
+
+               
+            }
+
+        }
+
+        private void StartTimer()
+        {
+            Slider_value = 15;
+        
+
+                for (int i = 15; i == 0; i--)
+                {
+                    Thread.Sleep(1000);
+                    Device.BeginInvokeOnMainThread(() => {
+                        Slider_value = i;
+                    });
+                    Console.WriteLine("**************** " + i + " ****************");
+
+                }
+            });
+           
         }
 
         private void SetAnswers()
@@ -213,7 +260,7 @@ namespace ArchivistGame
             bool correctAnswer = false;
             foreach (var answer in listOfAnswers)
             {
-                if(btn.Text==answer.Svar_navn && answer.Rigtig == true)
+                if (btn.Text == answer.Svar_navn && answer.Rigtig == true)
                 {
                     btn.BackgroundColor = Color.LightGreen;
                     DisplayAlert("Rigtigt", "Det var det rigtige svar", "Ok");
@@ -232,8 +279,8 @@ namespace ArchivistGame
                 btn.BackgroundColor = Color.Red;
                 DisplayAlert("Forkert", "Det var ikke det rigtige svar", "Ok");
             }
-    
 
+            GåVidere_btn.IsVisible = true;
             DisableRestOfTheButtons(true);
         }
 

@@ -48,7 +48,7 @@
             <StackLayout Grid.Row="4" Grid.Column="1">
 
                 <Slider x:Name="Timer_Slider" Value="{Binding Slider_value}" BackgroundColor="LightBlue" Rotation="-90" Minimum="0" Maximum="15" ></Slider>
-                <Label Text="Points"></Label>
+                <Label Text="{Binding Slider_value}"></Label>
 
             </StackLayout>
             <!--Question title area-->
@@ -62,7 +62,7 @@
             </Frame>
            
             <!--Næste spørgsmål knappe-->
-            <Image Source="Next.png" Aspect="AspectFit"  Grid.Row="4" x:Name="GåVidere_btn" Grid.Column="5" Grid.ColumnSpan="2" Margin="120,0,0,0">
+            <Image Source="Next.png" Aspect="AspectFit" IsVisible="False"  Grid.Row="4" x:Name="GåVidere_btn" Grid.Column="5" Grid.ColumnSpan="2" Margin="120,0,0,0">
                 <Image.GestureRecognizers>
                     <TapGestureRecognizer Tapped="OnImageNameTapped" NumberOfTapsRequired="1" />
                 </Image.GestureRecognizers>
