@@ -17,7 +17,7 @@
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
             <StackLayout  Grid.Row="0" Grid.ColumnSpan="4" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
-                <Label Text="Vælg emne" FontSize="Large"></Label>
+                <Label Text="Vælg emne" FontSize="42"></Label>
             </StackLayout>
             <StackLayout Grid.Row="1" Grid.RowSpan="2" Grid.Column="1" Grid.ColumnSpan="2">
                 <ListView x:Name="TopicsTable" ItemSelected="TopicsTable_ItemSelected" RowHeight="2" HasUnevenRows="True">

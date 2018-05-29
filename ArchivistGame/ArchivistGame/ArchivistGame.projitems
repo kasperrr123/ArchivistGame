@@ -67,4 +67,7 @@
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="$(MSBuildThisFileDirectory)music\music2.mp3" />
+  </ItemGroup>
 </Project>

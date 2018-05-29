@@ -22,7 +22,7 @@ namespace ArchivistGame
 
         private string json;
 
-        public string IP { get; set; } = "http://100.72.68.190";
+        public string IP { get; set; } = "100.72.68.190";
         public int PORT { get; set; } = 3000;
         public ServerConnection()
         {
@@ -50,7 +50,7 @@ namespace ArchivistGame
 
             try
             {
-                Stream stream = Client.OpenRead(IP + ":" + PORT + "/emner");
+                Stream stream = Client.OpenRead("http://" + IP + ":" + PORT + "/emner");
                 Client.Proxy = null;
                 StreamReader reader = new StreamReader(stream);
                 json = reader.ReadToEnd();
@@ -103,15 +103,15 @@ namespace ArchivistGame
 
             try
             {
-                Stream stream = Client.OpenRead(IP + ":" + PORT + "/question");
+                Stream stream = Client.OpenRead("http://" + IP + ":" + PORT + "/question");
                 StreamReader reader = new StreamReader(stream);
                 json = reader.ReadToEnd();
                 stream.Close();
 
             }
-            catch (Exception)
+            catch (Exception x )
             {
-                return null;
+                Console.WriteLine(x.Message);
             }
 
             List<Question> ListOfQuestions = new List<Question>();
@@ -123,7 +123,7 @@ namespace ArchivistGame
                 {
                     ListOfQuestions.Add(new Question
                     {
-                        Question_navn = question.spørgsmål,
+                        Question_navn = question.question,
                         Emne = question.emne,
                         Image_path = question.billede,
                         Fact = question.fakta,
@@ -143,11 +143,11 @@ namespace ArchivistGame
 
             try
             {
-                Stream stream = Client.OpenRead(IP + ":" + PORT + "/svar");
+                Stream stream = Client.OpenRead("http://" + IP + ":" + PORT + "/svar");
                 StreamReader reader = new StreamReader(stream);
                 json = reader.ReadToEnd();
                 stream.Close();
-
+                
             }
             catch (Exception)
             {
@@ -159,13 +159,13 @@ namespace ArchivistGame
             dynamic svar = JsonConvert.DeserializeObject<dynamic>(json);
             foreach (var svar_mulighed in svar)
             {
-                if (svar_mulighed.spørgsmål == spørgsmål)
+                if (svar_mulighed.question == spørgsmål)
                 {
                     svarMuligheder.Add(new Svar
                     {
                         Rigtig = svar_mulighed.rigtig,
                         Svar_navn = svar_mulighed.svar,
-                        Spørgsmål_navn = svar_mulighed.spørgsmål,
+                        Spørgsmål_navn = svar_mulighed.question,
                     });
                 }
 
@@ -179,7 +179,7 @@ namespace ArchivistGame
         public string PostToScoreboard (string json)
         {
             Client.Headers[HttpRequestHeader.ContentType] = "application/json";
-            return Client.UploadString(IP + ":" +  PORT + "/scoreboard", json);
+            return Client.UploadString("http://" + IP + ":" +  PORT + "/scoreboard", json);
         }
 
 

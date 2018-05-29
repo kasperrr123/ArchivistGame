@@ -6,18 +6,21 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using Android;
+using ArchivistGame.Droid;
 
 namespace ArchivistGame
 {
-	public partial class MainPage : ContentPage
-	{
-		public MainPage()
-		{
+    public partial class MainPage : ContentPage
+    {
+        MainActivity activity;
+        public MainPage()
+        {
 
-			InitializeComponent();
+            InitializeComponent();
             ServerConnection conn = ServerConnection.Instance;
             Singleton_obj.Instance.Reset();
-		}
+        }
 
 
         void OnImageNameTapped(object sender, EventArgs args)
@@ -29,8 +32,8 @@ namespace ArchivistGame
 
         private void GoToChooseTopicPage_Clicked(object sender, EventArgs e)
         {
-            
-           
+
+
             Singleton_obj.Instance.Playername = Playername_Field.Text;
             Navigation.PushAsync(new ChooseTopic());
         }

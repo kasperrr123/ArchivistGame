@@ -11,5 +11,6 @@ namespace ArchivistGame.models
         public string emne { get; set; }
         public string resultat { get; set; }
         public int point { get; set; }
+        public string dato { get; set; }
     }
 }

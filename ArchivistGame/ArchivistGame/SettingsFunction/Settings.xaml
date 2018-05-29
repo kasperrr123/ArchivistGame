@@ -5,9 +5,15 @@
     <ContentPage.Content>
 
         <StackLayout>
-            <Label Text="Forbindelses indstillinger"></Label>
-            <Entry Keyboard="Numeric" x:Name="Ip_adresse" Text="{Binding current_IP}" Placeholder="Ip"></Entry>
-            <Entry Keyboard="Numeric" x:Name="Port_adresse" Text="{Binding current_PORT}" Placeholder="Port"></Entry>
+            <Label HorizontalOptions="CenterAndExpand" Text="Forbindelses indstillinger" FontSize="Large"></Label>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                <Label Text="IP adresse" VerticalTextAlignment="Center"></Label>
+                <Entry x:Name="Ip_adresse" Text="{Binding Current_IP}" Placeholder="Ip"></Entry>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                <Label Text="Port" VerticalTextAlignment="Center"></Label>
+                <Entry Keyboard="Numeric" x:Name="Port_adresse" Text="{Binding Current_PORT}" Placeholder="Port"></Entry>
+            </StackLayout>
             <Button x:Name="Ændre_indstillinger_Btn" Clicked="Ændre_indstillinger_Btn_Clicked" Text="Ændre indstillinger"></Button>
         </StackLayout>
     </ContentPage.Content>

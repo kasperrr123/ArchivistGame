@@ -1,4 +1,5 @@
-﻿using ArchivistGame.models;
+﻿using ArchivistGame.Droid;
+using ArchivistGame.models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -23,12 +24,12 @@ namespace ArchivistGame
         public string Position_1 { get; set; }
         public SeeScore ()
 		{
+            MainActivity.player.SelectTrack(1);
             BindingContext = this;
             Total_points = "Total points: " + Singleton_obj.Instance.Points;
             Antal_rigtige = "Antal rigtige: " + Singleton_obj.Instance.Antal_Rigtige + "/" + Singleton_obj.Instance.Antal_Spørgsmål;
             decimal a = (decimal)Singleton_obj.Instance.Antal_Rigtige / (decimal)Singleton_obj.Instance.Antal_Spørgsmål;
             Procent_rigtige = "Procent rigtige: " + a*100 + "%";
-            Position_1 = "Position: ";
 			InitializeComponent ();
 		}
 
@@ -40,6 +41,7 @@ namespace ArchivistGame
                 point = Singleton_obj.Instance.Points,
                 emne = Singleton_obj.Instance.Emne.Emne_Navn,
                 resultat = Singleton_obj.Instance.Antal_Rigtige.ToString(),
+                dato = System.DateTime.Now.Day + "-" + System.DateTime.Now.Month + "-" + System.DateTime.Now.Year + " " + System.DateTime.Now.ToString("HH:mm:s"),
             };
            
             var result = ServerConnection.Instance.PostToScoreboard(JsonConvert.SerializeObject(score));

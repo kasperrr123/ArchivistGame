@@ -5,13 +5,12 @@
     <ContentPage.Content>
         <Grid>
             <Frame BorderColor="Black">
-                <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
+                <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" >
                     <Frame BorderColor="Black">
                         <Label HorizontalTextAlignment="Center" HorizontalOptions="FillAndExpand" x:Name="Points" FontSize="Large" Text="{Binding Total_points}"></Label>
                     </Frame>
                     <Label HorizontalTextAlignment="Center" HorizontalOptions="FillAndExpand" x:Name="AntalRigtige" Text="{Binding Antal_rigtige}"></Label>
                     <Label HorizontalTextAlignment="Center" HorizontalOptions="FillAndExpand" x:Name="ProcentRigtige" Text="{Binding Procent_rigtige}"></Label>
-                    <Label HorizontalTextAlignment="Center" HorizontalOptions="FillAndExpand" x:Name="Position_field" Text="{Binding Position_1}"></Label>
                     <Button x:Name="Afslut_Btn" HorizontalOptions="CenterAndExpand" BackgroundColor="LightGreen" Text="Afslut" Margin="0,50,0,0" Clicked="Afslut_Btn_Clicked"></Button>
                 </StackLayout>
             </Frame>

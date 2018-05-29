@@ -12,15 +12,28 @@ namespace ArchivistGame.SettingsFunction
 
         public Settings ()
 		{
-			InitializeComponent ();
+            BindingContext = this;
             Current_IP = ServerConnection.Instance.IP.ToString();
             Current_PORT = ServerConnection.Instance.PORT.ToString();
+            InitializeComponent ();
+           
         }
 
         private void Ændre_indstillinger_Btn_Clicked(object sender, EventArgs e)
         {
-            ServerConnection.Instance.IP = Ip_adresse.Text;
-            ServerConnection.Instance.PORT = int.Parse(Port_adresse.Text);
+            try
+            {
+                ServerConnection.Instance.IP = Ip_adresse.Text;
+                ServerConnection.Instance.PORT = int.Parse(Port_adresse.Text);
+                DisplayAlert("Ok", "Indstillingerne er gemt", "Ok");
+                Navigation.PopAsync();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+           
         }
 
      

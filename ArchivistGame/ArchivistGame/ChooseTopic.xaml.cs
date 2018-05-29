@@ -33,7 +33,16 @@ namespace ArchivistGame
             ListView view = sender as ListView;
             var emne = (Emne)view.SelectedItem;
             Singleton_obj.Instance.Emne = emne;
-            Navigation.PushAsync(new QuestionPage());
+            if (server.GetQuestions(emne.Emne_Navn).Count() == 0)
+            {
+                DisplayAlert("Hov!", "Ingen spørgsmål fundet.", "Ok");
+                Navigation.PushAsync(new MainPage());
+            }
+            else
+            {
+                Navigation.PushAsync(new QuestionPage());
+
+            }
         }
 
     }

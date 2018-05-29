@@ -27,11 +27,11 @@
         <Image Source="Logo.png" Aspect="AspectFill" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" Margin="20,0,20,0"></Image>
 
         <StackLayout Grid.Row="2" Grid.ColumnSpan="4"  HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
-            <Label Text="Lokal arkiv quiz spil"></Label>
+            <Label Text="Lokal arkiv quiz spil" FontSize="42" TextColor="Black"></Label>
         </StackLayout>
         <StackLayout Grid.Row="3" Grid.Column="1"  Grid.ColumnSpan="2">
-            <Entry x:Name="Playername_Field" Placeholder="Skriv dit spiller navn her"></Entry>
-            <Button x:Name="GoToChooseTopicPage" Text="Start" Clicked="GoToChooseTopicPage_Clicked"></Button>
+            <Entry x:Name="Playername_Field" Placeholder="Skriv dit spiller navn her" Text="Kasper Jørgensen"></Entry>
+            <Button x:Name="GoToChooseTopicPage" BackgroundColor="LightBlue" Text="Start" Clicked="GoToChooseTopicPage_Clicked"></Button>
         </StackLayout>
 
     </Grid>

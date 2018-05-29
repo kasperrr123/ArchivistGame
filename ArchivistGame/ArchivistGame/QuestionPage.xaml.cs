@@ -1,4 +1,5 @@
-﻿using Android.App;
+﻿
+using ArchivistGame.Droid;
 using ArchivistGame.models;
 using System;
 using System.Collections.Generic;
@@ -20,7 +21,8 @@ namespace ArchivistGame
 
         public ServerConnection server;
 
-
+        private Task timer;
+        private bool hasAnswered;
         private string question_name;
         public string Question_Name
         {
@@ -130,37 +132,36 @@ namespace ArchivistGame
 
         public QuestionPage()
         {
+          
+
+            hasAnswered = false;
             counter = 0;
             Singleton_obj.Instance.Antal_Rigtige = 0;
             antalrigtige_int = 0;
             BindingContext = this;
             server = ServerConnection.Instance;
+
+
             ListOfQuestions = server.GetQuestions(Singleton_obj.Instance.Emne.Emne_Navn);
+            
             Singleton_obj.Instance.Antal_Spørgsmål = ListOfQuestions.Count;
             listOfAnswers = server.GetAnswers(ListOfQuestions[counter].Question_navn);
+            
+            Question_Name = ListOfQuestions[counter].Question_navn;
+            Image_Path = ListOfQuestions[counter].Image_path;
+            Spiller_Navn = "Spillernavn: " + "\n" + Singleton_obj.Instance.Playername;
+            Current_Points = "Points: " + "\n" + Singleton_obj.Instance.Points;
+            Antal_Rigtige = "Antal rigtige: " + "\n" + antalrigtige_int + "/" + ListOfQuestions.Count;
+            Fact = ListOfQuestions[counter].Fact;
 
-            try
-            {
-                Question_Name = ListOfQuestions[counter].Question_navn;
-                Image_Path = ListOfQuestions[counter].Image_path;
-                Spiller_Navn = "Spillernavn: " + "\n" + Singleton_obj.Instance.Playername;
-                Current_Points = "Points: " + "\n" + Singleton_obj.Instance.Points;
-                Antal_Rigtige = "Antal rigtige: " + "\n" + antalrigtige_int + "/" + ListOfQuestions.Count;
-                Time_Used = "Tid brugt: " + "\n" + 150 + "s";
-                Fact = ListOfQuestions[counter].Fact;
 
-            }
-            catch (Exception)
-            {
-
-                DisplayAlert("Hov!", "Der er ingen spørgsmål til dette emne", "Gå til forsiden");
-                Navigation.PushAsync(new MainPage());
-            }
 
             Slider_value = 15;
             InitializeComponent();
 
             SetAnswers();
+
+
 
 
         }
@@ -183,30 +184,50 @@ namespace ArchivistGame
             {
                 Console.WriteLine("Im ready to quiz");
                 StartTimer();
-             
 
-               
+
+
             }
 
         }
 
         private void StartTimer()
         {
+            hasAnswered = false;
             Slider_value = 15;
-        
+            timer = Task.Run(() =>
+            {
 
-                for (int i = 15; i == 0; i--)
+                for (int i = 15; i >= 0; i--)
                 {
-                    Thread.Sleep(1000);
-                    Device.BeginInvokeOnMainThread(() => {
-                        Slider_value = i;
-                    });
-                    Console.WriteLine("**************** " + i + " ****************");
+                    if (hasAnswered)
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Inside thread");
+                        Thread.Sleep(1000);
+                        Device.BeginInvokeOnMainThread(() =>
+                        {
+                            Slider_value = i;
+                        });
+                        Console.WriteLine("**************** " + i + " ****************");
+                    }
+
 
                 }
+            }).ContinueWith(timer =>
+            {
+                timer.Dispose();
             });
-           
+
+
+
+
         }
+
+
 
         private void SetAnswers()
         {
@@ -222,7 +243,7 @@ namespace ArchivistGame
                 Svar_1 = listOfAnswers[0].Svar_navn;
                 Svar_2 = listOfAnswers[1].Svar_navn;
                 Svar_3 = listOfAnswers[2].Svar_navn;
-                svar_4 = listOfAnswers[3].Svar_navn;
+                Svar_4 = listOfAnswers[3].Svar_navn;
             }
         }
 
@@ -242,7 +263,8 @@ namespace ArchivistGame
                 DisableRestOfTheButtons(false);
                 SetDefaultBtnColor();
                 Image_Path = ListOfQuestions[counter].Image_path;
-                Current_Points = "Points: " + "\n" + Singleton_obj.Instance.Points;
+                StartTimer();
+
             }
         }
 
@@ -256,6 +278,7 @@ namespace ArchivistGame
 
         private void Svar_clicked(object sender, EventArgs e)
         {
+            hasAnswered = true;
             Button btn = sender as Button;
             bool correctAnswer = false;
             foreach (var answer in listOfAnswers)
@@ -265,9 +288,10 @@ namespace ArchivistGame
                     btn.BackgroundColor = Color.LightGreen;
                     DisplayAlert("Rigtigt", "Det var det rigtige svar", "Ok");
                     antalrigtige_int++;
-                    Antal_Rigtige = "Antal rigtige: " + "\n" + antalrigtige_int + "/" + ListOfQuestions.Count;
                     Singleton_obj.Instance.Antal_Rigtige++;
-                    Singleton_obj.Instance.Points += 15;
+                    Singleton_obj.Instance.Points += Slider_value;
+                    Current_Points = "Points: " + "\n" + Singleton_obj.Instance.Points;
+                    Antal_Rigtige = "Antal rigtige: " + "\n" + antalrigtige_int + "/" + ListOfQuestions.Count;
                     correctAnswer = true;
                     break;
                 }
