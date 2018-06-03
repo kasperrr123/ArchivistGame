@@ -17,6 +17,8 @@ namespace ArchivistGame
         {
 
             InitializeComponent();
+            ServerConnection conn = ServerConnection.Instance;
+
             MainPage = new NavigationPage(new MainPage());
         }
 

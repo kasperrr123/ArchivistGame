@@ -1,6 +1,7 @@
 ﻿
 using System;
 using Android.App;
+using Android.Content;
 using Android.Content.PM;
 using Android.Media;
 using Android.OS;
@@ -18,18 +19,18 @@ namespace ArchivistGame.Droid
         protected override void OnCreate(Bundle bundle)
         {
             player = new MediaPlayer();
-            TabLayoutResource = Resource.Layout.Tabbar;
-            ToolbarResource = Resource.Layout.Toolbar;
             LoadSongs();
             PlayThemeSong();
+            TabLayoutResource = Resource.Layout.Tabbar;
+            ToolbarResource = Resource.Layout.Toolbar;
             base.OnCreate(bundle);
-
             global::Xamarin.Forms.Forms.Init(this, bundle);
             LoadApplication(new App());
 
         }
 
-        public  void PlayThemeSong()
+
+        public void PlayThemeSong()
         {
 
             player.Stop();
@@ -54,13 +55,13 @@ namespace ArchivistGame.Droid
 
         private void LoadSongs()
         {
-           
+
             Songs[0] = Resource.Raw.Theme;
             Songs[1] = Resource.Raw.scoreMusic;
 
         }
 
-      
+
     }
 }
 

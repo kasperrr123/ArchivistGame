@@ -23,7 +23,7 @@
                 <RowDefinition Height="40"></RowDefinition>
             </Grid.RowDefinitions>
             <!--svar muligheder area-->
-            <Grid Grid.Row="4" Grid.Column="3" Grid.ColumnSpan="2">
+            <Grid Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="4" HorizontalOptions="CenterAndExpand">
                 <StackLayout >
                     <StackLayout x:Name="svarMuligheder_row1" Orientation="Horizontal" VerticalOptions="CenterAndExpand">
                         <Button x:Name="btn_1" Text="{Binding Svar_1}" Clicked="Svar_clicked"  BackgroundColor="LightBlue" HorizontalOptions="FillAndExpand"></Button>
@@ -38,12 +38,14 @@
             <!--Center photo-->
             <Image Grid.Row="1" Grid.RowSpan="3" Grid.Column="3" Grid.ColumnSpan="2" Source="{Binding Image_Path}" Margin="0,0,0,15"></Image>
             <!--Player fakta boks-->
-            <StackLayout Grid.Row="1" Grid.RowSpan="2" Grid.Column="1" BackgroundColor="Yellow">
-                <Label Text="{Binding Spiller_Navn}" HorizontalTextAlignment="Center"></Label>
-                <Label Text="{Binding Current_Points}" HorizontalTextAlignment="Center" ></Label>
-                <Label Text="{Binding Antal_Rigtige}" HorizontalTextAlignment="Center" ></Label>
-                <Label Text="{Binding Time_Used}" HorizontalTextAlignment="Center" ></Label>
-            </StackLayout>
+            <Frame  Grid.Row="1" Grid.RowSpan="2" Grid.Column="1" BorderColor="DarkBlue" BackgroundColor="LightBlue">
+                <StackLayout>
+                    <Label Text="{Binding Spiller_Navn}" HorizontalTextAlignment="Center"></Label>
+                    <Label Text="{Binding Current_Points}" HorizontalTextAlignment="Center" ></Label>
+                    <Label Text="{Binding Antal_Rigtige}" HorizontalTextAlignment="Center" ></Label>
+                    <Label Text="{Binding Time_Used}" HorizontalTextAlignment="Center" ></Label>
+                </StackLayout>
+            </Frame>
             <!--Timer area-->
             <StackLayout Grid.Row="4" Grid.Column="1">
 
@@ -52,7 +54,7 @@
 
             </StackLayout>
             <!--Question title area-->
-            <Label Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="4" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Text="{Binding Question_Name}" ></Label>
+            <Label Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="4" HorizontalTextAlignment="Center" FontSize="Large" VerticalTextAlignment="Center" Text="{Binding Question_Name}" ></Label>
             <!--Fakta boks i højre side-->
             <Frame BorderColor="Black" Grid.Row="1" Grid.RowSpan="2" Grid.Column="6">
                 <StackLayout >

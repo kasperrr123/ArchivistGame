@@ -13,12 +13,21 @@ namespace ArchivistGame
 {
     public partial class MainPage : ContentPage
     {
-        MainActivity activity;
         public MainPage()
         {
 
+            // Final thing:
+            // Clearing the entire navigation stack and returning to mainPage.
+            try
+            {
+                this.Navigation.RemovePage(this.Navigation.NavigationStack[this.Navigation.NavigationStack.Count - 2]);
+                Console.WriteLine("Pages removed");
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("No pages to remove");
+            }
             InitializeComponent();
-            ServerConnection conn = ServerConnection.Instance;
             Singleton_obj.Instance.Reset();
         }
 

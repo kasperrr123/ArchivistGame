@@ -22,11 +22,10 @@ namespace ArchivistGame
 
         private string json;
 
-        public string IP { get; set; } = "100.72.68.190";
+        public string IP { get; set; } = "100.72.24.83";
         public int PORT { get; set; } = 3000;
         public ServerConnection()
         {
-            Topics = new List<Emne>();
             Client = new WebClient();
 
         }
@@ -46,7 +45,6 @@ namespace ArchivistGame
 
         public List<Emne> GetTopics()
         {
-            // Create a New HttpClient object.
 
             try
             {
@@ -62,15 +60,7 @@ namespace ArchivistGame
                 return null;
             }
 
-
-            //// Call asynchronous network methods in a try/catch block to handle exceptions
-            //try
-            //{
-
             List<Emne> listOfEmner = new List<Emne>();
-            //HttpResponseMessage response = await client.GetAsync("http://100.72.15.51:/bikes");
-            ////response.EnsureSuccessStatusCode();
-            //string json_result = await response.Content.ReadAsStringAsync();
             dynamic emner = JsonConvert.DeserializeObject<dynamic>(json);
             foreach (var item in emner)
             {
@@ -83,19 +73,6 @@ namespace ArchivistGame
                 });
             }
             return listOfEmner;
-
-            //}
-            //catch (HttpRequestException e)
-            //{
-            //    Console.WriteLine("\nException Caught!");
-            //    Console.WriteLine("Message :{0} ", e.Message);
-            //}
-
-
-            //// Need to call dispose on the HttpClient object
-            //// when done using it, so the app doesn't leak resources
-            //Client.Dispose();
-            //return null;
         }
 
         public List<Question> GetQuestions(string Emne_navn)

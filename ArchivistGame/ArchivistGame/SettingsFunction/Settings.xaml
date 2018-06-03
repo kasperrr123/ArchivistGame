@@ -5,7 +5,7 @@
     <ContentPage.Content>
 
         <StackLayout>
-            <Label HorizontalOptions="CenterAndExpand" Text="Forbindelses indstillinger" FontSize="Large"></Label>
+            <Label HorizontalOptions="CenterAndExpand" Text="Server indstillinger" FontSize="Large"></Label>
             <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
                 <Label Text="IP adresse" VerticalTextAlignment="Center"></Label>
                 <Entry x:Name="Ip_adresse" Text="{Binding Current_IP}" Placeholder="Ip"></Entry>

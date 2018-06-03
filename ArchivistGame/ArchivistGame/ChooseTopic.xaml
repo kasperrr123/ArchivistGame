@@ -48,12 +48,6 @@
                                     <Label Text="{Binding Emne_Beskrivelse}" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" Grid.Column="2" />
                                 </Grid>
 
-                                <!--<StackLayout Orientation="Horizontal">
-                                    <Image Source="{Binding Image_path}" HeightRequest="75" WidthRequest="75"></Image>
-                                    <Label Text="{Binding Emne_Navn}"  HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
-                                    <Label Text="{Binding Emne_Beskrivelse}"  HorizontalTextAlignment="Center" VerticalTextAlignment="Center"  />
-                                </StackLayout>-->
-
                             </ViewCell>
                         </DataTemplate>
                     </ListView.ItemTemplate>
